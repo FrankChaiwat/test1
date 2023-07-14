@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ordered Food Menu</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ordered Food Menu</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Food Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody id="ordered-menu">
+      <!-- Insert ordered menu items dynamically using JavaScript -->
+    </tbody>
+  </table>
+
+  <script>
+    function addToOrderedMenu(name, quantity, price) {
+      var tableBody = document.getElementById("ordered-menu");
+      var newRow = document.createElement("tr");
+      newRow.innerHTML = "<td>" + name + "</td><td>" + quantity + "</td><td>" + price + "</td>";
+      tableBody.appendChild(newRow);
+    }
+
+    // Example usage: addToOrderedMenu("กุ้งเผาซีฟูด", 2, 598);
+    // This will add a row to the table with the food item name, quantity, and price.
+  </script>
+</body>
+</html>

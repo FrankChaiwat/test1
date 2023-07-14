@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Menu</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="script.js"></script>
+  <style>
+    /* Add your shopping cart styles here */
+    .cart-container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
+    .cart-container h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    .cart-item-details {
+      flex: 1;
+    }
+    .cart-item-details h3 {
+      font-size: 18px;
+      margin: 0;
+    }
+    .cart-item-details p {
+      font-size: 14px;
+      margin: 0;
+      color: #888;
+    }
+    .cart-item-quantity {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cart-item-quantity input {
+      width: 40px;
+      padding: 5px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .cart-item-quantity button {
+      font-size: 18px;
+      padding: 5px 10px;
+      border: none;
+      background-color: #eee;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+    .cart-item-quantity button:hover {
+      background-color: #ddd;
+    }
+    .cart-item-quantity button:active {
+      background-color: #ccc;
+    }
+    .cart-item-remove button {
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .cart-item-remove button:hover {
+      background-color: #f55c5c;
+    }
+    .cart-item-remove button:active {
+      background-color: #f44444;
+    }
+    .cart-total {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+    .cart-total span {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .cart-checkout button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .cart-checkout button:hover {
+      background-color: #45a049;
+    }
+    .cart-checkout button:active {
+      background-color: #3e9046;
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <!-- Food menu code here -->
+  </div>
+
+  <div class="cart-container">
+    <h2>Shopping Cart</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">
+      <span>Total: $<span id="cart-total">0</span></span>
+    </div>
+    <div class="cart-checkout">
+      <button onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <script>
+    var cartItems = [];
+
+    function addToCart(name, quantity, price) {
+      var existingItem = cartItems.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        cartItems.push({ name: name, quantity: quantity, price: price });
+      }
+      updateCart();
+    }
+
+    function removeFromCart(name) {
+      cartItems = cartItems.filter(item => item.name !== name);
+      updateCart();
+    }
+
+    function updateCart() {
+      var cartItemsContainer = document.getElementById("cart-items");
+      var cartTotal = document.getElementById("cart-total");
+      cartItemsContainer.innerHTML = "";
+
+      var total = 0;
+      for (var i = 0; i < cartItems.length; i++) {
+        var item = cartItems[i];
+        var itemTotal = item.quantity * item.price;
+        total += itemTotal;
+
+        var itemElement = document.createElement("div");
+        itemElement.classList.add("cart-item");
+        itemElement.innerHTML = `
+          <img src="menu/${item.name.toLowerCase().replace(" ", "-")}.jpg" alt="${item.name}">
+          <div class="cart-item-details">
+            <h3>${item.name}</h3>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Price: $${item.price}</

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Food Menu</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span onclick="closeModal()" class="close">&times;</span>
+      <h2>รายการสินค้า</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>สินค้า</th>
+            <th>ราคา</th>
+            <th>จำนวน</th>
+            <th>รวม</th>
+            <th>ลบ</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items"></tbody>
+      </table>
+      
+      <p id="cart-total">รวมทั้งหมด: 0 : บาท</p> 
+      
+      <center>
+        <button onclick="closeModal()">ยืนยันการสั่ง</button> 
+        <button onclick="closeModal()">ปิด</button>
+      </center>
+    </div>
+  </div>
+
+<button onclick="openModal()" class="floating-button">รายการสั่งซื้อ</button>
+
+<div class="menu-container">
+  <h1>Food Menu</h1>
+  <div class="tm-paging-links">
+    <nav>
+      <ul>
+        <li class="tm-paging-item"><a href="#" class="tm-paging-link" onclick="showMenu('menu1')">ปลา</a></li>
+        <li class="tm-paging-item"><a href="#" class="tm-paging-link" onclick="showMenu('menu2')">กุ้ง</a></li>
+        <li class="tm-paging-item"><a href="#" class="tm-paging-link" onclick="showMenu('menu3')">ปู</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <ul class="menu-list" id="menu1">
+    <li>
+      <img src="menu/กุ้ง/1.jpg" alt="Food 1">
+      <div class="menu-item-info">
+        <h3>กุ้งเผาซีฟูด</h3>
+        <p></p>
+        <span>$399</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F001')">-</button>
+        <input type="text" id="F001" name="F001" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F001')">+</button>
+      </div>
+    </li>
+    
+    <li>
+      <img src="menu/กุ้ง/11.jpg" alt="Food 2">
+      <div class="menu-item-info">
+        <h3>กุ้งเเช่น้ำปลา</h3>
+        <p></p>
+        <span>$299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F002')">-</button>
+        <input type="text" id="F002" name="F002" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F002')">+</button>
+      </div>
+    </li>
+
+    <li>
+      <img src="menu/ปลา/4.jpg" alt="Food 3">
+      <div class="menu-item-info">
+        <h3>ปลาเผา</h3>
+        <p></p>
+        <span>$299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F003')">-</button>
+        <input type="text" id="F003" name="F003" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F003')">+</button>
+      </div>
+    </li>
+
+    <li>
+      <img src="menu/ปลาหมึก/1.jpg" alt="Food 4">
+      <div class="menu-item-info">
+        <h3>ปลาหมึกทอด</h3>
+        <p></p>
+        <span>$299</span>   
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F004')">-</button>
+        <input type="text" id="F004" name="F004" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F004')">+</button>
+      </div>
+    </li>
+
+    <li>
+      <img src="menu/ปลา/3.jpg" alt="Food 1">
+      <div class="menu-item-info">
+        <h3>ปลาต้มยำ</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F005')">-</button>
+        <input type="text" id="F005" name="F005" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F005')">+</button>
+      </div>
+    </li>
+    
+    <li>
+      <img src="menu/ปลา/2.jpg" alt="Food 2">
+      <div class="menu-item-info">
+        <h3>ปลาเผาเกลือ</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F006')">-</button>
+        <input type="text" id="F006" name="F006" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F006')">+</button>
+      </div>
+    </li>
+    
+  </ul>
+
+  <ul class="menu-list" id="menu2" style="display: none;">
+    <li>
+      <img src="menu/กุ้ง/2.jpg" alt="Food 1">
+      <div class="menu-item-info">
+        <h3>ปลาต้มยำ</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('F005')">-</button>
+        <input type="text" id="F005" name="F005" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('F005')">+</button>
+      </div>
+    </li>
+    
+    <li>
+      <img src="menu/กุ้ง/2.jpg" alt="Food 2">
+      <div class="menu-item-info">
+        <h3>กุ้งเผาซีฟูด</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('quantity4')">-</button>
+        <input type="text" id="quantity4" name="quantity4" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('quantity4')">+</button>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="menu-list" id="menu3" style="display: none;">
+    <li>
+      <img src="menu/กุ้ง/3.jpg" alt="Food 1">
+      <div class="menu-item-info">
+        <h3>กุ้งเผาซีฟูด</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('quantity5')">-</button>
+        <input type="text" id="quantity5" name="quantity5" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('quantity5')">+</button>
+      </div>
+    </li>
+    
+    <li>
+      <img src="menu/กุ้ง/3.jpg" alt="Food 2">
+      <div class="menu-item-info">
+        <h3>กุ้งเผาซีฟูด</h3>
+        <p>อร่อยสุดๆ 399</p>
+        <span>299</span>
+      </div>
+      <div class="quantity-container">
+        <button type="button" class="quantity-button decrease" onclick="decreaseQuantity('quantity6')">-</button>
+        <input type="text" id="quantity6" name="quantity6" value="0" readonly>
+        <button type="button" class="quantity-button increase" onclick="increaseQuantity('quantity6')">+</button>
+      </div>
+      <button type="submit" class="order-button" onclick="showAlert('menu1', 'quantity1')">สั่งอาหาร</button>
+    </li>
+  </ul>
+</div>
+
+
+</body>
+</html>
